@@ -97,16 +97,16 @@ function sendPlayerInfoToDiscord(player) {
 
 HaxballJS.then((HBInit) => {
   const room = HBInit({
-    roomName: "🔵⚪ Hax365: https://discord.gg/Xpc4hZvr5S 🏆🧉",
-    maxPlayers: 16,
+    roomName: "🍞 Juegan todos en el Reino del Pan 🍞",
+    maxPlayers: 26,
     public: true,
     noPlayer: false,
-    playerName: "Arg.Becken: 190.138.109.181",
+    playerName: "Tiene voz de pibito de 10",
     token: token,
     geo: {
-      code: "DE",
-      lat: -34.600001972647654,
-      lon: -58.379999832993384,
+      code: "AR",
+      lat: -32.94681931263071,
+      lon: -60.6393203598206,
     },
   });
 
@@ -120,7 +120,7 @@ HaxballJS.then((HBInit) => {
     sendPlayerInfoToDiscord(player);
 
     room.sendAnnouncement(
-      `La mejor liga: https://discord.gg/Xpc4hZvr5S`,
+      `Jaja posta creen que tengo 10 años ... aca los que vinieron a por mi fueron ustedes https://discord.gg/A3xetuRz :)`,
       null,
       0xff0000,
       "bold",
