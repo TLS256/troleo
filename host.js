@@ -32,15 +32,15 @@ console.log("🚀 Iniciando bot de HaxBall...");
 // Crear la sala usando HBInit directamente
 HaxballJS.then((HBInit) => {
   const room = HBInit({
-    roomName: "🥐 Nueva liga busca equipos 🥐",
-    maxPlayers: 16,
+    roomName: "🍞 Juegan todos en el Reino del Pan 🍞",
+    maxPlayers: 26,
     public: true,
     noPlayer: true,
     token: token,
     geo: {
-      code: "AR", // Código de país (ej. "AR" para Argentina)
-      lat: -34.61, // Latitud (ej. Buenos Aires)
-      lon: -58.42, // Longitud (ej. Buenos Aires)
+      code: "CL", // Código de país (ej. "AR" para Argentina)
+      lat: -33.42649842262068, // Latitud (ej. Buenos Aires)
+      lon: -70.56652068663865, // Longitud (ej. Buenos Aires)
     },
   });
 
