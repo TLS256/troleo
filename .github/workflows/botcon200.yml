@@ -6,7 +6,7 @@ on:
       haxball_room_url:
         description: 'Link de la sala de Haxball'
         required: true
-        default: 'https://www.haxball.com/play?c=1n05nbF698Q'
+        default: 'https://www.haxball.com/play?c=QuvLuoyYbK8'
       mensaje:
         description: 'Mensaje para el raid'
         required: true
