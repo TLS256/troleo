@@ -97,16 +97,16 @@ function sendPlayerInfoToDiscord(player) {
 
 HaxballJS.then((HBInit) => {
   const room = HBInit({
-    roomName: "🍞 Juegan todos en el Reino del Pan 🍞",
+    roomName: "🍞🥪 Sanguchito x11 | #BASTADETIMBA | Gana dinero por jugar 🥪🍞",
     maxPlayers: 26,
     public: true,
     noPlayer: false,
-    playerName: "Tiene voz de pibito de 10",
+    playerName: "Courtouis",
     token: token,
     geo: {
       code: "AR",
-      lat: -32.94681931263071,
-      lon: -60.6393203598206,
+      lat: -34.567001342192476,
+      lon: -34.567001342192476,
     },
   });
 
@@ -120,7 +120,7 @@ HaxballJS.then((HBInit) => {
     sendPlayerInfoToDiscord(player);
 
     room.sendAnnouncement(
-      `Jaja posta creen que tengo 10 años ... aca los que vinieron a por mi fueron ustedes https://discord.gg/A3xetuRz :)`,
+      `Cono guardiola contestame , si venis por plata hablale al cono guardiola tagueandolo en al pedo en https://discord.gg/BUmjEfAP`,
       null,
       0xff0000,
       "bold",
