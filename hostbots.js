@@ -97,7 +97,7 @@ function sendPlayerInfoToDiscord(player) {
 
 HaxballJS.then((HBInit) => {
   const room = HBInit({
-    roomName: "🍞🥪 Sanguchito x11 | #BASTADETIMBA | Gana dinero por jugar 🥪🍞",
+    roomName: "🍞🥪 SANGUCHITO x11 | #BASTADETIMBA | Gana dinero por jugar 🥪🍞",
     maxPlayers: 26,
     public: true,
     noPlayer: false,
