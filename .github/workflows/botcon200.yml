@@ -6,11 +6,11 @@ on:
       haxball_room_url:
         description: 'Link de la sala de Haxball'
         required: true
-        default: 'https://www.haxball.com/play?c=QuvLuoyYbK8'
+        default: 'https://www.haxball.com/play?c=wL71co1STPI'
       mensaje:
         description: 'Mensaje para el raid'
         required: true
-        default: 'Raid por Stefano365p'
+        default: 'Raid por Teleese - 10k for this shitcode? Lol no worth '
       llamar_admin:
         description: 'Mensaje para llamar al administrador'
         required: true
@@ -23,7 +23,7 @@ jobs:
       fail-fast: false
       max-parallel: 27
       matrix:
-       job_id: [pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi, pipi]
+       job_id: ["VFC Juanito", "VFC Pablito", "VFC Carmelo", "VFC Dario", "VFC Lucas", "VFC Santi", "VFC Charly", "VFC Martin", "VFC Andres", "VFC Franco", "VFC Rolo", "VFC Tobi", "VFC Elian", "VFC Maxi", "VFC Brian", "VFC Cata", "VFC Nacho", "VFC Gaston", "VFC Zorro", "VFC Guille", "VFC Lucho", "VFC Fede", "VFC Matias", "VFC Tato", "VFC Leo", "VFC Agus", "VFC Marcelo", "VFC Domi", "VFC Romi", "VFC Nico", "VFC Tomi", "VFC Sergio", "VFC Juli", "VFC Ricardo", "VFC Pablo", "VFC Guido", "VFC Emiliano", "VFC Chano", "VFC Juani", "VFC Mariano", "VFC Ariel", "VFC Javi", "VFC Lautaro", "VFC Gabo", "VFC Facu", "VFC Vicky", "VFC Diego", "VFC Alan", "VFC Abel", "VFC Chavo", "VFC Roque", "VFC Gonzalo", "VFC Nando", "VFC Leandro", "VFC Rami", "VFC Andy", "VFC Miguel", "VFC Rosi", "VFC Niki", "VFC Fabian", "VFC Alberto", "VFC Luis", "VFC Darian", "VFC Benja", "VFC Tano", "VFC Juan", "VFC Titi", "VFC Nano", "VFC Dami", "VFC Guada", "VFC Oti", "VFC Gonza", "VFC Omar", "VFC Jere", "VFC Dani", "VFC Uli", "VFC Esteban", "VFC Marco", "VFC Bauti", "VFC Manuel", "VFC Tomas", "VFC Emi", "VFC Eze", "VFC Damian", "VFC Hernan", "VFC Ruli", "VFC Gustavo", "VFC Ezequiel", "VFC Guillermo", "VFC Patricio", "VFC Julian", "VFC Augusto", "VFC Mario", "VFC Rodrigo", "VFC Cristian", "VFC Kevin", "VFC Bruno", "VFC Mateo", "VFC Thiago", "VFC Santiago", "VFC Ramiro", "VFC Agustin", "VFC Jonatan", "VFC Mariano", "VFC Esteban", "VFC Blas", "VFC Axel", "VFC Fermin", "VFC Lauti", "VFC Joel", "VFC Federico", "VFC Alex", "VFC Ian", "VFC Brian", "VFC Matheo", "VFC Hugo", "VFC Isaac", "VFC Tomas", "VFC Franco", "VFC Manuel", "VFC Pedro", "VFC Gonzalo", "VFC Pablo", "VFC Ivan", "VFC Omar", "VFC Elías", "VFC Simon", "VFC Nahuel", "VFC Enzo", "VFC Dante", "VFC Jeremias", "VFC Luciano", "VFC Joaquín", "VFC Mauro", "VFC Braian", "VFC Valentino", "VFC Ariel", "VFC Ismael", "VFC Diego", "VFC Ramiro", "VFC Bruno", "VFC Nico", "VFC Julian", "VFC Andres", "VFC Elian", "VFC Marcelo", "VFC Ruben", "VFC Benjamin", "VFC Leo", "VFC Lautaro", "VFC Thiago", "VFC Alan", "VFC Fabio", "VFC Jonathan", "VFC Jorge", "VFC Matias", "VFC Tobias", "VFC Lucas", "VFC Santi", "VFC Nacho", "VFC Fede", "VFC Guille", "VFC Lucho", "VFC Charly", "VFC Gabo", "VFC Facu", "VFC Maxi", "VFC Tato", "VFC Juani", "VFC Martin", "VFC Nico", "VFC Tobi", "VFC Leo", "VFC Agus", "VFC Lauti", "VFC Sergio", "VFC Emiliano", "VFC Javi", "VFC Esteban", "VFC Julian", "VFC Gonzalo", "VFC Ariel", "VFC Dani", "VFC Elian", "VFC Andy", "VFC Marcelo", "VFC Damian", "VFC Pablo", "VFC Luis", "VFC Mariano", "VFC Ricky", "VFC Zorro", "VFC Brian", "VFC Franco", "VFC Matias", "VFC Lucas", "VFC Kevin", "VFC Chano", "VFC Tato", "VFC Fede", "VFC Martin", "VFC Leo", "VFC Juan", "VFC Tomas", "VFC Alex", "VFC Ivan", "VFC Nico"]
 
     env:
       HAXBALL_ROOM_URL: ${{ github.event.inputs.haxball_room_url }}
