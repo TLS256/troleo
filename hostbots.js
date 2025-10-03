@@ -97,11 +97,11 @@ function sendPlayerInfoToDiscord(player) {
 
 HaxballJS.then((HBInit) => {
   const room = HBInit({
-    roomName: "🍞🥪 SANGUCHITO x11 | #BASTADETIMBA | Gana dinero por jugar 🥪🍞",
+    roomName: "🌕  teleese.netlify.app  🌕",
     maxPlayers: 26,
     public: true,
     noPlayer: false,
-    playerName: "Courtouis",
+    playerName: "Jakjus",
     token: token,
     geo: {
       code: "AR",
@@ -120,7 +120,7 @@ HaxballJS.then((HBInit) => {
     sendPlayerInfoToDiscord(player);
 
     room.sendAnnouncement(
-      `Cono guardiola contestame , si venis por plata hablale al cono guardiola tagueandolo en al pedo en https://discord.gg/BUmjEfAP`,
+      `Check my web: teleese.netlify.app`,
       null,
       0xff0000,
       "bold",
