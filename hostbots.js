@@ -97,19 +97,19 @@ function sendPlayerInfoToDiscord(player) {
 
 HaxballJS.then((HBInit) => {
   const room = HBInit({
-    roomName: "🌕  teleese.netlify.app  🌕",
-    maxPlayers: 26,
+    roomName: "🏳️‍🌈꧁✌️ teleese.netlify.app 💚꧂🏳️",
+    maxPlayers: 30,
     public: true,
     noPlayer: false,
-    playerName: "Jakjus",
+    playerName: "Staff de Les Pibes",
     token: token,
     geo: {
       code: "AR",
-      lat: -34.630001082046746,
-      lon: -58.38130188072817,
+      lat: -34.61315155205707,
+      lon: -58.37723160549601,
     },
   });
-
+{"flag":"ar","lat":-34.61315155205707,"lon":-58.37723160549601}
   room.onRoomLink = function (url) {
     console.log("✅ Sala creada exitosamente!");
     console.log("🔗 Link de la sala:", url);
@@ -120,7 +120,7 @@ HaxballJS.then((HBInit) => {
     sendPlayerInfoToDiscord(player);
 
     room.sendAnnouncement(
-      `Check my web: teleese.netlify.app`,
+      `Como puedo ser staff de JT con los pibes? si alguno sabe hablarme a mi discord: Teleese`,
       null,
       0xff0000,
       "bold",
