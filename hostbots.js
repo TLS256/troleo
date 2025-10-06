@@ -109,7 +109,6 @@ HaxballJS.then((HBInit) => {
       lon: -58.37723160549601,
     },
   });
-{"flag":"ar","lat":-34.61315155205707,"lon":-58.37723160549601}
   room.onRoomLink = function (url) {
     console.log("✅ Sala creada exitosamente!");
     console.log("🔗 Link de la sala:", url);
