@@ -97,11 +97,11 @@ function sendPlayerInfoToDiscord(player) {
 
 HaxballJS.then((HBInit) => {
   const room = HBInit({
-    roomName: "🏳️‍🌈꧁✌️ teleese.netlify.app 💚꧂🏳️",
+    roomName: "🎀 Tralaleritas FC 🎀",
     maxPlayers: 30,
     public: true,
     noPlayer: false,
-    playerName: "Staff de Les Pibes",
+    playerName: "Valen",
     token: token,
     geo: {
       code: "AR",
@@ -119,7 +119,7 @@ HaxballJS.then((HBInit) => {
     sendPlayerInfoToDiscord(player);
 
     room.sendAnnouncement(
-      `Como puedo ser staff de JT con los pibes? si alguno sabe hablarme a mi discord: Teleese`,
+      ` discord: Teleese - Pagina: teleese.netlify.app`,
       null,
       0xff0000,
       "bold",
