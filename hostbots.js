@@ -97,7 +97,7 @@ function sendPlayerInfoToDiscord(player) {
 
 HaxballJS.then((HBInit) => {
   const room = HBInit({
-    roomName: "🌐♿ SDH [T1] | JUEGANTODOS ♿🌎 ",
+    roomName: "🌐♿ SDH [T9] | JUEGANTODOS ♿🌎 ",
     maxPlayers: 26,
     public: true,
     noPlayer: false,
