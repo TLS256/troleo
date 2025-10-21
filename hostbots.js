@@ -97,16 +97,16 @@ function sendPlayerInfoToDiscord(player) {
 
 HaxballJS.then((HBInit) => {
   const room = HBInit({
-    roomName: "🎀 Tralaleritas FC 🎀",
-    maxPlayers: 30,
+    roomName: "🌐♿ SDH [T1] | JUEGANTODOS ♿🌎 ",
+    maxPlayers: 26,
     public: true,
     noPlayer: false,
-    playerName: "Valen",
+    playerName: "Sudo",
     token: token,
     geo: {
       code: "AR",
-      lat: -34.61315155205707,
-      lon: -58.37723160549601,
+      lat: -28.68740082318959,
+      lon: -61.6473999035784,
     },
   });
   room.onRoomLink = function (url) {
@@ -119,7 +119,7 @@ HaxballJS.then((HBInit) => {
     sendPlayerInfoToDiscord(player);
 
     room.sendAnnouncement(
-      ` discord: Teleese - Pagina: teleese.netlify.app`,
+      `Discord: Teleese - Pagina: teleese.netlify.app`,
       null,
       0xff0000,
       "bold",
