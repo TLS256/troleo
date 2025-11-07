@@ -47,9 +47,6 @@ jobs:
           npm install puppeteer puppeteer-extra puppeteer-extra-plugin-stealth
           npm ci
 
-      - name: Esperar inicio sincronizado
-        run: sleep $((RANDOM % 10 + 5))
-
       - name: Ejecutar bot
         run: node botsstefano.js
         env:
