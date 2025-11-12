@@ -45,7 +45,7 @@ async function main() {
 page = await browser.newPage();
 
 var haxballCountryCodes = [
-  "uy", "ar", "br", "cn", "ly", "me", "vi", "cl", "cy"
+  "uy", "ar"
 ];
 
 var randomCode = haxballCountryCodes[Math.floor(Math.random() * haxballCountryCodes.length)];
