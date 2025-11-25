@@ -49,7 +49,7 @@ jobs:
 
       - name: Instalar dependencias
         run: |
-          npm install node-haxball node-fetch
+          npm install node-haxball
 
       - name: Ejecutar bot
         run: node botsstefano.js
