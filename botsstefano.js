@@ -1,7 +1,4 @@
-// node.js / CommonJS initialization
-global.RTCPeerConnection = require('wrtc').RTCPeerConnection;
-global.RTCSessionDescription = require('wrtc').RTCSessionDescription;
-global.RTCIceCandidate = require('wrtc').RTCIceCandidate;
+
 
 const { Utils, Room } = require("node-haxball")();
 const fetch = require('node-fetch');
